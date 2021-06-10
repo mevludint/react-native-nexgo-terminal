@@ -31,7 +31,14 @@ import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nullable;
 
+import com.nexgo.oaf.apiv3.APIProxy;
+import com.nexgo.oaf.apiv3.DeviceEngine;
+
 public class MainApplication extends Application implements ReactApplication {
+
+  public DeviceEngine deviceEngine;
+
+
   private final ReactModuleRegistryProvider mModuleRegistryProvider = new ReactModuleRegistryProvider(
     new BasePackageList().getPackageList()
   );
@@ -46,6 +53,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       List<ReactPackage> packages = new PackageList(this).getPackages();
       packages.add(new ModuleRegistryAdapter(mModuleRegistryProvider));
+      packages.add(new NexgoPrinterPackage());
+
+
       return packages;
     }
 
@@ -93,6 +103,8 @@ public class MainApplication extends Application implements ReactApplication {
     }
 
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+
+
   }
 
   /**

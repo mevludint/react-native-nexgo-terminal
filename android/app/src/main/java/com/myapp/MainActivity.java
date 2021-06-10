@@ -10,6 +10,8 @@ import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 import expo.modules.splashscreen.singletons.SplashScreen;
 import expo.modules.splashscreen.SplashScreenImageResizeMode;
 
+import android.view.KeyEvent;
+
 public class MainActivity extends ReactActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -37,5 +39,14 @@ public class MainActivity extends ReactActivity {
                 return new RNGestureHandlerEnabledRootView(MainActivity.this);
             }
         };
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN && this.getReactInstanceManager() != null) {
+            this.getReactInstanceManager().showDevOptionsDialog();
+            return true;
+        }
+        return super.onKeyUp(keyCode, event);
     }
 }
